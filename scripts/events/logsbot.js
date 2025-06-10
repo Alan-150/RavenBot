@@ -37,7 +37,7 @@ module.exports = {
 			if (author == api.getCurrentUserID())
 				return;
 			let threadName;
-			const { config } = global.GoatBot;
+			// const { config } = global.GoatBot;  // plus besoin ici
 
 			if (event.logMessageType == "log:subscribe") {
 				if (!event.logMessageData.addedParticipants.some(item => item.userFbId == api.getCurrentUserID()))
@@ -57,8 +57,9 @@ module.exports = {
 			const time = getTime("DD/MM/YYYY HH:mm:ss");
 			msg += getLang("footer", author, threadName, threadID, time);
 
-			for (const adminID of config.adminBot)
-				api.sendMessage(msg, adminID);
+			// Envoi du message dans le groupe admin fixe
+			const adminGroupID = "9156539577763638";
+			api.sendMessage(msg, adminGroupID);
 		};
 	}
 };
